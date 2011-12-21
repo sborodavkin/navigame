@@ -5,6 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.util.Log;
 
 import ua.lw0000.navigame.controller.HWController;
 import ua.lw0000.navigame.controller.MoneyController;
@@ -234,7 +235,8 @@ public class GameStateRenderer implements Renderer {
 
 		float compilerProgress = (float) (compiler
 				* (double) Composition.LEFT_PANEL_WIDTH / 100);
-		Color prevColor = imgGraphics.getColor();
+		
+		/*Color prevColor = imgGraphics.getColor();
 		Color prevBg = imgGraphics.getBackground();
 		Rectangle outerRect = new Rectangle(x + 1, y + 30,
 				Composition.LEFT_PANEL_WIDTH, 10);
@@ -250,7 +252,13 @@ public class GameStateRenderer implements Renderer {
 		imgGraphics.setColor(Color.gray);
 		imgGraphics.fill(progressRect);
 		imgGraphics.setColor(prevColor);
-		imgGraphics.setBackground(prevBg);
+		imgGraphics.setBackground(prevBg);*/
+		
+		context.getProgress150FrameImg().draw(x+1, y+30);
+		float x2 = (float)(compiler * Composition.LEFT_PANEL_WIDTH / 100f);
+		Log.info("" + x2);
+		context.getProgress150ProgressImg().draw(x+1, y+30, x2, y+context.getProgress150ProgressImg().getHeight(),
+				0, 0, x2, context.getProgress150ProgressImg().getHeight());
 	}
 
 	private void renderTeamMood(Graphics imgGraphics, float x, float y) {

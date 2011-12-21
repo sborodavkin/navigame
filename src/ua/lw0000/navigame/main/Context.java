@@ -65,6 +65,12 @@ public class Context {
 	private static final String PATH_HW_SUPER_HOVER = "image/hw_super_hover.png";
 	private static final String PATH_HW_SUPER_DISABLED = "image/hw_super_disabled.png";
 	private static final String PATH_CHECKMARK = "image/checkmark.png";
+	
+	private static final String PATH_PROGRESS_150_FRAME = "image/progress_150_frame.png";
+	private static final String PATH_PROGRESS_150_PROGRESS = "image/progress_150_progress.png";
+	private static final String PATH_PROGRESS_118_FRAME = "image/progress_118_frame.png";
+	private static final String PATH_PROGRESS_118_PROGRESS = "image/progress_118_progress.png";
+	
 	/**
 	 * Is used to draw procedurally-generated images
 	 * (e.g. sprite + text etc.)
@@ -115,6 +121,10 @@ public class Context {
 	private Image hwSuperHoverImg;
 	private Image hwSuperDisabledImg;
 	private Image checkmark;
+	private Image progress150FrameImg;
+	private Image progress150ProgressImg;
+	private Image progress118FrameImg;
+	private Image progress118ProgressImg;
 	
 	private Image[] mapImg;
 		
@@ -173,6 +183,11 @@ public class Context {
 		hwSuperHoverImg = new Image(PATH_HW_SUPER_HOVER);
 		hwSuperDisabledImg = new Image(PATH_HW_SUPER_DISABLED);
 		checkmark = new Image(PATH_CHECKMARK);
+		
+		progress150FrameImg = new Image(PATH_PROGRESS_150_FRAME);
+		progress150ProgressImg = new Image(PATH_PROGRESS_150_PROGRESS);
+		progress118FrameImg = new Image(PATH_PROGRESS_118_FRAME);
+		progress118ProgressImg = new Image(PATH_PROGRESS_118_PROGRESS);
 	}
 	
 	private void initFonts() throws SlickException {
@@ -374,5 +389,23 @@ public class Context {
 	public Image getCheckmark() {
 		return checkmark;
 	}
+
+	public Image getProgress150FrameImg() {
+		return progress150FrameImg;
+	}
+
+	public Image getProgress150ProgressImg() {
+		return progress150ProgressImg;
+	}
+
+	public Image getProgress118FrameImg() {
+		return progress118FrameImg;
+	}
+
+	public Image getProgress118ProgressImg() {
+		return progress118ProgressImg;
+	}
+	
+	
 }
 
