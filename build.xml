@@ -1,0 +1,94 @@
+<!-- ===================== Project Properties =========================== -->
+
+<project name="anacondagame" default="all" basedir=".">
+
+   <property name="app.name" value="AnacondaGame"/>
+   <property name="app.jar" value="AnacondaGame.jar"/>   
+
+   <!-- ===================== Project Environment =========================== -->
+   <property name="source.home" value="${basedir}/src"/>
+   <property name="lib.home" value="${basedir}/lib"/>
+   <property name="main.class" value="ua.lw0000.anacondagame.main.AnacondaGame"/>
+
+   <!-- ===================== Build Environment =========================== -->
+   <property name="dist.home" value="${basedir}/dist"/>
+   <property name="dist.classes" value="${dist.home}/classes"/>
+   <property name="target.jar" value="${basedir}/bin/${app.jar}" />
+   <property name="deploy.home" value="${basedir}/deploy"/>
+
+   <path id="project.class.path">
+      <fileset dir="${lib.home}">
+         <include name="**/*.jar"/>
+      </fileset>
+   </path>
+
+   <!-- ==================== All ==================== -->
+   <target name="all" depends="jar"
+      description="Clean up and produce all distributions">    
+      <copy todir="${deploy.home}">
+         <fileset dir="${basedir}/bin" includes="${app.jar}"/>
+         <fileset dir="${basedir}/src" includes="*.xml"/>
+      </copy>
+      <copy todir="${deploy.home}/lib">
+         <fileset dir="${basedir}/lib" includes="**/*.jar"/>           
+      </copy>
+      <copy todir="${deploy.home}/lib/native">
+         <fileset dir="${basedir}/lib/native" includes="**/*.*"/>           
+      </copy>
+      <copy todir="${deploy.home}/image">
+         <fileset dir="${basedir}/image" includes="**/*.*"/>           
+      </copy>
+
+      <!-- prepare launching bat file -->
+      <echo file="${deploy.home}/AnacondaGame.bat" append="false">java -Djava.library.path="lib/native" -jar ${app.jar}</echo>
+   </target>
+
+   <!-- ==================== Clean ==================== -->
+   <target name="clean"   
+      description="Delete all generated files and directories">
+      <delete dir="${dist.home}/"/>
+      <delete dir="${deploy.home}/"/>
+      <delete file="${target.jar}" />
+   </target>
+
+   <!-- ==================== Init ==================== -->
+   <target name="init"
+      description="Initialize the build Java ${java.specification.version} Build">
+      <mkdir dir="${dist.home}"/>
+      <mkdir dir="${dist.classes}"/>
+      <mkdir dir="${deploy.home}"/>
+   </target>
+
+   <!-- ==================== Compile ==================== -->
+   <target name="compile" depends="init" description="Compile the build tree">
+      <!-- Compile sources -->
+      <javac srcdir="${source.home}"
+         destdir="${dist.classes}"
+         source="1.6"
+         target="1.6">
+         <classpath refid="project.class.path"/>
+      </javac>
+   </target>
+
+   <!--  ==================== Jar ==================== -->
+   <target name="jar" depends="compile"
+      description="Build all Java archives (JARs)">
+      <!-- trick to get the right relative paths to libs (specify wrong path to JAR) -->
+      <manifestclasspath property="lib.list" jarfile="${basedir}/${app.jar}">
+         <classpath refid="project.class.path"/>
+      </manifestclasspath>
+      <jar jarfile="${target.jar}" basedir="${dist.classes}">
+         <manifest>
+            <attribute name="Main-Class" value="${main.class}"/>
+            <attribute name="Class-Path" value="${lib.list} ."/>
+         </manifest>
+      </jar>
+   </target>
+
+   <!--  ==================== Run ==================== -->
+   <target name="run" depends="all" description="Run AnacondaGame">
+       <java dir="${deploy.home}" jar="${deploy.home}/${app.jar}" fork="true" failonerror="true"/>
+   </target>
+   
+</project>
+
