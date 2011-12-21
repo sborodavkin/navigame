@@ -1,19 +1,19 @@
 <!-- ===================== Project Properties =========================== -->
 
-<project name="anacondagame" default="all" basedir=".">
+<project name="navigame" default="all" basedir=".">
 
-   <property name="app.name" value="AnacondaGame"/>
-   <property name="app.jar" value="AnacondaGame.jar"/>   
+   <property name="app.name" value="NaviGame"/>
+   <property name="app.jar" value="NaviGame.jar"/>   
 
    <!-- ===================== Project Environment =========================== -->
    <property name="source.home" value="${basedir}/src"/>
    <property name="lib.home" value="${basedir}/lib"/>
-   <property name="main.class" value="ua.lw0000.anacondagame.main.AnacondaGame"/>
+   <property name="main.class" value="ua.lw0000.navigame.main.NaviGame"/>
 
    <!-- ===================== Build Environment =========================== -->
    <property name="dist.home" value="${basedir}/dist"/>
    <property name="dist.classes" value="${dist.home}/classes"/>
-   <property name="target.jar" value="${basedir}/bin/${app.jar}" />
+   <property name="target.jar" value="${basedir}/dist/${app.jar}" />
    <property name="deploy.home" value="${basedir}/deploy"/>
 
    <path id="project.class.path">
@@ -26,7 +26,7 @@
    <target name="all" depends="jar"
       description="Clean up and produce all distributions">    
       <copy todir="${deploy.home}">
-         <fileset dir="${basedir}/bin" includes="${app.jar}"/>
+         <fileset dir="${dist.home}" includes="${app.jar}"/>
          <fileset dir="${basedir}/src" includes="*.xml"/>
       </copy>
       <copy todir="${deploy.home}/lib">
@@ -40,7 +40,7 @@
       </copy>
 
       <!-- prepare launching bat file -->
-      <echo file="${deploy.home}/AnacondaGame.bat" append="false">java -Djava.library.path="lib/native" -jar ${app.jar}</echo>
+      <echo file="${deploy.home}/${app.name}.bat" append="false">java -Djava.library.path="lib/native" -jar ${app.jar}</echo>
    </target>
 
    <!-- ==================== Clean ==================== -->
@@ -86,7 +86,7 @@
    </target>
 
    <!--  ==================== Run ==================== -->
-   <target name="run" depends="all" description="Run AnacondaGame">
+   <target name="run" depends="all" description="Run ${app.name}">
        <java dir="${deploy.home}" jar="${deploy.home}/${app.jar}" fork="true" failonerror="true"/>
    </target>
    

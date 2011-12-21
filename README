@@ -1,0 +1,67 @@
+== The Navigame ==
+
+=== Overview ===
+
+The goal of the game is to develop the navigation system and compile digital maps - as much as possible.
+For this you have a pool of skilled developers and map production engineers which can be assigned different tasks.
+
+There are developers who create the navigation software and production engineers who build the maps using the
+map compiler which is a part of navigation. The more the navigation system is feature-complete
+("Navi-Progress" in the right panel), the bigger maps can be handled with it.
+
+The goal of the game is to (a) finish the navigation development, (b) fulfil the map production plan by building:
+- 10 Harsum maps
+- 5 Munich maps
+- 4 Hamburg maps
+- 3 Switzerland maps
+- 2 DACHI maps (Germany + Italy, San Marino, Vatican City, Austria, Switzerland, Liechtenstein)
+- 1 ECE map (full Europe)
+
+and (c) earning as much money as possible.
+
+This version is still under development and thus some features of the game can work incorrectly or do not work
+at all. Also the game balance is probably not refined :)
+
+Technologies/frameworks used: Java6, Slick, LWGL. You need to install JRE in order to run the game.
+
+=== How to Play ===
+
+You see the office room upon the game start. Left-click on empty space to add more developers, right-click to
+add more production engineers.
+
+Left-click a free developer so that he starts working on a feature-development (a corresponding label will appear).
+Left-click again to make him free. The more developers work on a system, the faster it grows (don't think it
+scales to infinity, though).
+
+Features of the developers:
+* Compiler developers - implement features for map compiler
+* NDSLib developers - implement the data access library. The more developers of such kind you have, the faster
+the development is.
+* DBTests developers - implement database tests. It is less probable to have production bugs if you have such
+people (working) in the team.
+
+Remember: having a developer being rest does not benefit you, though increases costs.
+
+Click any map in the bottom of screen to start its build by a free production engineer (you need to have some).
+
+During the map build, bugs in compiler can block the corresponding production (a red bug will be displayed over
+the map and the production will be blocked). To fix a bug, you must have some free developers - click the blocked map
+to assign a bugfix to any of them. As soon as bug is fixed, the production of the map is continued automatically.
+Please note that the developer who fixed the bug will remain free (get salary for doing nothing), so take care to assign
+some tasks to him.
+
+During the game, the people mood decreases while salary ambitions increase, which leads to loss of performance.
+To motivate a person, click the "lamp" button next to it. To increase his salary, click the "$" button. The current
+overall performance of developers and production guys is displayed in the right panel.
+
+Sometimes it is easier to fire a person and to hire a new one instead - right-click a perfon to fire him.
+
+If you have enough money, you can ask all the people to work overtimes by pressing the button "Overtimes" to the right.
+People will perform faster, but their salary for the current month will be doubled. The overtime request
+cannot be cancelled and will be stopped as soon as the salary is paid and the new month is started.
+
+It is also possible to updgrade the HW 2 times during the game. Don't neglect this possibility - otherwise building
+big maps can become a pain.
+
+Remember: you loose money for salaries, you gain money for maps. Good luck!
+
