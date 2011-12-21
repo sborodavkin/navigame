@@ -14,24 +14,36 @@ import ua.lw0000.navigame.model.Resource;
 
 public class DeveloperRenderer extends ResourceRenderer {
 
-
 	public DeveloperRenderer(Resource dev, Context context,
 			MapController mapController, Image mainImg, float w, float n) {
 		super(dev, context, mapController, mainImg, w, n);
+		int feature = ((Developer) dev).getFeature();
+		switch (feature) {
+		case Developer.FEATURE_ANACONDA:
+			mainSprite = context.getDeveloperCompilerImage();
+			break;
+		case Developer.FEATURE_NDSLIB:
+			mainSprite = context.getDeveloperNDSLibImage();
+			break;
+		case Developer.FEATURE_DBTEST:
+			mainSprite = context.getDeveloperDBTestsImage();
+			break;
+		}
 	}
 
 	@Override
 	protected void renderState(Graphics g) throws SlickException {
 		if (getResource().getState() == Developer.FEATURE) {
 			renderFeatureDevProgressIfNeeded(g, 1, STATE_N);
-		} else if (getResource().getState() == Developer.BUGFIX) {			
+		} else if (getResource().getState() == Developer.BUGFIX) {
 			renderBugfixProgressIfNeeded(g);
-		}		
+		}
 	}
-	
-	private void renderFeatureDevProgressIfNeeded(Graphics g, float x, float y) throws SlickException {
+
+	private void renderFeatureDevProgressIfNeeded(Graphics g, float x, float y)
+			throws SlickException {
 		String activity = "";
-		Developer dev = (Developer)getResource();
+		Developer dev = (Developer) getResource();
 		switch (dev.getFeature()) {
 		case Developer.FEATURE_ANACONDA:
 			activity = "Compiler Dev.";
@@ -45,25 +57,30 @@ public class DeveloperRenderer extends ResourceRenderer {
 		}
 		g.drawString(activity, 1, STATE_N);
 	}
-	
+
 	private void renderBugfixProgressIfNeeded(Graphics g) throws SlickException {
-		Map map = getMapController().getBugfixMap((Developer)getResource());
+		Map map = getMapController().getBugfixMap((Developer) getResource());
 		if (map != null) {
-			g.drawString(map.getTitle(), 1, Composition.ROOM_CELL_SIZE-35);			
-			double mapPercent = (double)map.getBugfixMSecondsPassed() / (double)map.getTotalMSecondsToBugfix();
+			g.drawString(map.getTitle(), 1, Composition.ROOM_CELL_SIZE - 35);
+			double mapPercent = (double) map.getBugfixMSecondsPassed()
+					/ (double) map.getTotalMSecondsToBugfix();
 			Color prevColor = g.getColor();
 			Color prevBg = g.getBackground();
 			g.setColor(Color.cyan);
 			int progressBarW = 5;
-			int progressBarWidth = Composition.ROOM_CELL_SIZE - progressBarW * 2;
-			g.drawRect(progressBarW, Composition.ROOM_CELL_SIZE-15, progressBarWidth, 3);
+			int progressBarWidth = Composition.ROOM_CELL_SIZE - progressBarW
+					* 2;
+			g.drawRect(progressBarW, Composition.ROOM_CELL_SIZE - 15,
+					progressBarWidth, 3);
 			g.setColor(Color.black);
-			g.drawRect(progressBarW+1, Composition.ROOM_CELL_SIZE-14, progressBarWidth-2, 1);
+			g.drawRect(progressBarW + 1, Composition.ROOM_CELL_SIZE - 14,
+					progressBarWidth - 2, 1);
 			g.setColor(Color.cyan);
-			float progress = (float)((mapPercent * (double)progressBarWidth));
-			g.drawRect(progressBarW+1, Composition.ROOM_CELL_SIZE-14, progress, 1);
+			float progress = (float) ((mapPercent * (double) progressBarWidth));
+			g.drawRect(progressBarW + 1, Composition.ROOM_CELL_SIZE - 14,
+					progress, 1);
 			g.setColor(prevColor);
-			g.setBackground(prevBg);			
+			g.setBackground(prevBg);
 		}
 	}
 }

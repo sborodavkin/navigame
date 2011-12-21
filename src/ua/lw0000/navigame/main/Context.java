@@ -12,7 +12,9 @@ import org.newdawn.slick.SlickException;
 public class Context {
 	
 	private static final String PATH_BACKGROUND = "image/global_background.png";
-	private static final String PATH_DEVELOPER = "image/developer.png";
+	private static final String PATH_DEVELOPER_COMPILER = "image/developer_compiler.png";
+	private static final String PATH_DEVELOPER_DBTESTS = "image/developer_dbtests.png";
+	private static final String PATH_DEVELOPER_NDSLIB = "image/developer.png";
 	private static final String PATH_PRODUCTION = "image/production.png";
 	private static final String PATH_EMPTY = "image/empty.png";
 	private static final String PATH_CURSE_FONT = "image/font_curse.fnt";
@@ -81,7 +83,9 @@ public class Context {
 	
 	private Image background;
 	private Image emptyPosition;
-	private Image developerPosition;
+	private Image developerCompilerPosition;
+	private Image developerNDSLibPosition;
+	private Image developerDBTestsPosition;
 	private Image productionPosition;
 	private Image bugImg;
 	private Image fixImg;
@@ -125,7 +129,9 @@ public class Context {
 	private void initGraphics() throws SlickException {
 		background = new Image(PATH_BACKGROUND);
 		emptyPosition = new Image(PATH_EMPTY);
-		developerPosition = new Image(PATH_DEVELOPER);
+		developerDBTestsPosition = new Image(PATH_DEVELOPER_DBTESTS);
+		developerCompilerPosition = new Image(PATH_DEVELOPER_COMPILER);
+		developerNDSLibPosition = new Image(PATH_DEVELOPER_NDSLIB);
 		productionPosition = new Image(PATH_PRODUCTION);	
 		generatedPosition = new Image(Composition.WIDTH,Composition.HEIGHT);
 		
@@ -211,10 +217,18 @@ public class Context {
 		return emptyPosition;
 	}
 	
-	public Image getDeveloper() {
-		return developerPosition;
+	public Image getDeveloperCompilerImage() {
+		return developerCompilerPosition;
 	}
 	
+	public Image getDeveloperNDSLibImage() {
+		return developerNDSLibPosition;
+	}
+	
+	public Image getDeveloperDBTestsImage() {
+		return developerDBTestsPosition;
+	}
+		
 	public Image getProduction() {
 		return productionPosition;
 	}

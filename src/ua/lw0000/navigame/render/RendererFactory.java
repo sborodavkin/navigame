@@ -32,7 +32,7 @@ public class RendererFactory {
 		Renderer renderer = rendererCache.get(position);
 		if (renderer == null) {			
 			if (position instanceof Developer) {			
-				renderer = new DeveloperRenderer((Developer)position, context, mapController, context.getDeveloper(), x, y);
+				renderer = new DeveloperRenderer((Developer)position, context, mapController, context.getDeveloperCompilerImage(), x, y);
 			} else if (position instanceof Production) {
 				renderer = new ProductionRenderer((Production)position, context, mapController, context.getProduction(), x, y);
 			} else {

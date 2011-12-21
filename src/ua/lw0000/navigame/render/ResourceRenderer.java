@@ -31,7 +31,7 @@ public abstract class ResourceRenderer implements Renderer {
 	
 	protected static final int STATE_N = 68;
 
-	private Image mainSprite;
+	protected Image mainSprite;
 
 	public ResourceRenderer(Resource dev, Context context,
 			MapController mapController, Image mainImg, float w, float n) {
