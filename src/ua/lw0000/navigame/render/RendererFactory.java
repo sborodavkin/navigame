@@ -36,7 +36,7 @@ public class RendererFactory {
 			} else if (position instanceof Production) {
 				renderer = new ProductionRenderer((Production)position, context, mapController, context.getProduction(), x, y);
 			} else {
-				renderer = new EmptyRenderer(context);
+				renderer = new EmptyRenderer();
 			}
 			rendererCache.put(position, renderer);
 			// prevent overbloating

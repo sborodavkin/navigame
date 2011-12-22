@@ -4,16 +4,14 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.util.Log;
 
 import ua.lw0000.navigame.controller.HWController;
 import ua.lw0000.navigame.controller.MoneyController;
 import ua.lw0000.navigame.controller.MoodController;
 import ua.lw0000.navigame.controller.TimeController;
-import ua.lw0000.navigame.main.NaviGame;
 import ua.lw0000.navigame.main.Composition;
 import ua.lw0000.navigame.main.Context;
+import ua.lw0000.navigame.main.NaviGame;
 
 public class GameStateRenderer implements Renderer {
 
@@ -37,11 +35,10 @@ public class GameStateRenderer implements Renderer {
 		this.hwController = hwCtrl;
 		this.context = ctx;
 
-		btnRequestOvertimes = new AnchorMouseOverArea(
-				NaviGame.gameContainer, context.getOvertimeImg(), 0, 90,
-				100, 30) {
+		btnRequestOvertimes = new AnchorMouseOverArea(NaviGame.gameContainer,
+				context.getOvertimeImg(), 0, 90, 100, 30) {
 			@Override
-			public void mousePressed(int button, int mx, int my) {				
+			public void mousePressed(int button, int mx, int my) {
 				super.mousePressed(button, mx, my);
 				if (isMouseOver()) {
 					moneyController.setOvertime(true);
@@ -54,36 +51,39 @@ public class GameStateRenderer implements Renderer {
 		btnRequestOvertimes.setMouseDownImage(context.getOvertimeImg());
 
 		btnHWBasic = new AnchorMouseOverArea(NaviGame.gameContainer,
-				context.getHwBasicDisabledImg(), 0, 160, 40, 40) {
+				context.getHwBasicDisabledImg(), 0, 175, 40, 40) {
 			@Override
-			public void mousePressed(int button, int mx, int my) {				
+			public void mousePressed(int button, int mx, int my) {
 				super.mousePressed(button, mx, my);
-				if (isMouseOver() && hwController.getHW() != HWController.HW_BASIC) {
-					hwController.upgradeHW(HWController.HW_BASIC);					
+				if (isMouseOver()
+						&& hwController.getHW() != HWController.HW_BASIC) {
+					hwController.upgradeHW(HWController.HW_BASIC);
 				}
 			}
 		};
 		btnHWBasic.setAnchorW(Composition.LEFT_PANEL_W);
 		btnHWBasic.setAnchorN(Composition.ROOM_NW);
 		btnHWAdvanced = new AnchorMouseOverArea(NaviGame.gameContainer,
-				context.getHwAdvancedDisabledImg(), 50, 160, 40, 40) {
+				context.getHwAdvancedDisabledImg(), 50, 175, 40, 40) {
 			@Override
-			public void mousePressed(int button, int mx, int my) {				
+			public void mousePressed(int button, int mx, int my) {
 				super.mousePressed(button, mx, my);
-				if (isMouseOver() && hwController.getHW() != HWController.HW_ADVANCED) {
-					hwController.upgradeHW(HWController.HW_ADVANCED);					
+				if (isMouseOver()
+						&& hwController.getHW() != HWController.HW_ADVANCED) {
+					hwController.upgradeHW(HWController.HW_ADVANCED);
 				}
 			}
 		};
 		btnHWAdvanced.setAnchorW(Composition.LEFT_PANEL_W);
 		btnHWAdvanced.setAnchorN(Composition.ROOM_NW);
 		btnHWSuper = new AnchorMouseOverArea(NaviGame.gameContainer,
-				context.getHwSuperDisabledImg(), 100, 160, 40, 40) {
+				context.getHwSuperDisabledImg(), 100, 175, 40, 40) {
 			@Override
-			public void mousePressed(int button, int mx, int my) {				
+			public void mousePressed(int button, int mx, int my) {
 				super.mousePressed(button, mx, my);
-				if (isMouseOver() && hwController.getHW() != HWController.HW_SUPER) {
-					hwController.upgradeHW(HWController.HW_SUPER);					
+				if (isMouseOver()
+						&& hwController.getHW() != HWController.HW_SUPER) {
+					hwController.upgradeHW(HWController.HW_SUPER);
 				}
 			}
 		};
@@ -98,8 +98,8 @@ public class GameStateRenderer implements Renderer {
 		imgGraphics.clear();
 		renderSalary(imgGraphics, 0, 0);
 		renderHardware(imgGraphics, 0, 130);
-		renderCompiler(imgGraphics, 0, 210);
-		renderTeamMood(imgGraphics, 0, 260);
+		renderCompiler(imgGraphics, 0, 230);
+		renderTeamMood(imgGraphics, 0, 280);
 
 		imgGraphics.flush();
 		return context.getGenImage().copy();
@@ -124,22 +124,13 @@ public class GameStateRenderer implements Renderer {
 
 		float salaryProgress = (float) (timeFromLastSalary
 				* (double) Composition.LEFT_PANEL_WIDTH / (double) TimeController.SALARY_INTERVAL);
-		prevColor = imgGraphics.getColor();
-		Color prevBg = imgGraphics.getBackground();
-		Rectangle outerRect = new Rectangle(x + 1, y + 70,
-				Composition.LEFT_PANEL_WIDTH, 10);
-		Rectangle innerRect = new Rectangle(x + 2, y + 70,
-				Composition.LEFT_PANEL_WIDTH - 2, 9);
-		Rectangle progressRect = new Rectangle(x + 1, y + 70, salaryProgress, 9);
-
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.draw(outerRect);
-		imgGraphics.setColor(Color.black);
-		imgGraphics.fill(innerRect);
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.fill(progressRect);
-		imgGraphics.setColor(prevColor);
-		imgGraphics.setBackground(prevBg);
+	
+		float x2 = salaryProgress; //(float) (salaryProgress * Composition.LEFT_PANEL_WIDTH);
+		context.getProgress150ProgressImg().draw(x + 1, y + 70, x2,
+				y + 70 + context.getProgress150ProgressImg().getHeight(), 0, 0,
+				x2, context.getProgress150ProgressImg().getHeight());
+		context.getProgress150FrameImg().draw(x + 1, y + 70);
+		
 
 		if (!moneyController.isOvertime()) {
 			btnRequestOvertimes.setNormalImage(context.getOvertimeImg());
@@ -163,11 +154,12 @@ public class GameStateRenderer implements Renderer {
 		Color prevColor = imgGraphics.getColor();
 		imgGraphics.setColor(Color.white);
 		imgGraphics.drawString("Hardware upgrade:", x, y);
-		//imgGraphics.setFont(context.getPriceFont());
+		// imgGraphics.setFont(context.getPriceFont());
 		if (hwController.isEnabled(HWController.HW_ADVANCED)) {
 			btnHWAdvanced.setNormalImage(context.getHwAdvancedImg());
 			if (hwController.getHW() != HWController.HW_ADVANCED) {
-				btnHWAdvanced.setMouseOverImage(context.getHwAdvancedHoverImg());
+				btnHWAdvanced
+						.setMouseOverImage(context.getHwAdvancedHoverImg());
 			} else {
 				btnHWAdvanced.setMouseOverImage(context.getHwAdvancedImg());
 			}
@@ -208,11 +200,11 @@ public class GameStateRenderer implements Renderer {
 		btnHWAdvanced.render(NaviGame.gameContainer, imgGraphics);
 		btnHWSuper.render(NaviGame.gameContainer, imgGraphics);
 		imgGraphics
-				.drawString("$" + HWController.PAYMENT_BASIC, x + 10, y + 30);
+				.drawString("$" + HWController.PAYMENT_BASIC, x + 10, y + 25);
 		imgGraphics.drawString("$" + HWController.PAYMENT_ADVANCED,
-				x + 10 + 50, y + 30);
+				x + 10 + 50, y + 25);
 		imgGraphics.drawString("$" + HWController.PAYMENT_SUPER, x + 10 + 100,
-				y + 30);
+				y + 25);
 
 		float xChk = x;
 		if (hwController.getHW() == HWController.HW_ADVANCED) {
@@ -222,7 +214,7 @@ public class GameStateRenderer implements Renderer {
 		} else {
 			xChk = x;
 		}
-		imgGraphics.drawImage(context.getCheckmark(), xChk, y + 60);
+		imgGraphics.drawImage(context.getCheckmark(), xChk, y + 70);
 
 		imgGraphics.setColor(prevColor);
 	}
@@ -233,32 +225,11 @@ public class GameStateRenderer implements Renderer {
 
 		double compiler = moneyController.getGameState().getCompilerComplete();
 
-		float compilerProgress = (float) (compiler
-				* (double) Composition.LEFT_PANEL_WIDTH / 100);
-		
-		/*Color prevColor = imgGraphics.getColor();
-		Color prevBg = imgGraphics.getBackground();
-		Rectangle outerRect = new Rectangle(x + 1, y + 30,
-				Composition.LEFT_PANEL_WIDTH, 10);
-		Rectangle innerRect = new Rectangle(x + 2, y + 30,
-				Composition.LEFT_PANEL_WIDTH - 2, 9);
-		Rectangle progressRect = new Rectangle(x + 1, y + 30, compilerProgress,
-				9);
-
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.draw(outerRect);
-		imgGraphics.setColor(Color.black);
-		imgGraphics.fill(innerRect);
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.fill(progressRect);
-		imgGraphics.setColor(prevColor);
-		imgGraphics.setBackground(prevBg);*/
-		
-		context.getProgress150FrameImg().draw(x+1, y+30);
-		float x2 = (float)(compiler * Composition.LEFT_PANEL_WIDTH / 100f);
-		Log.info("" + x2);
-		context.getProgress150ProgressImg().draw(x+1, y+30, x2, y+context.getProgress150ProgressImg().getHeight(),
-				0, 0, x2, context.getProgress150ProgressImg().getHeight());
+		float x2 = (float) (compiler * Composition.LEFT_PANEL_WIDTH / 100f);
+		context.getProgress150ProgressImg().draw(x + 1, y + 30, x2,
+				y + 30 + context.getProgress150ProgressImg().getHeight(), 0, 0,
+				x2, context.getProgress150ProgressImg().getHeight());
+		context.getProgress150FrameImg().draw(x + 1, y + 30);
 	}
 
 	private void renderTeamMood(Graphics imgGraphics, float x, float y) {
@@ -273,9 +244,6 @@ public class GameStateRenderer implements Renderer {
 		imgGraphics.setFont(context.getMediumFont());
 		imgGraphics.drawString(title, x, y);
 
-		float devMoodProgress = (float) (mood
-				* (double) (Composition.LEFT_PANEL_WIDTH - 32) / 100);
-
 		if ((float) mood / 100 >= DeveloperRenderer.MOOD_OK_BORDER) {
 			context.getMoodOkImg().draw(x + 1 + 8, y + 24);
 		} else if ((float) mood / 100 >= DeveloperRenderer.MOOD_AVG_BORDER) {
@@ -284,23 +252,11 @@ public class GameStateRenderer implements Renderer {
 			context.getMoodBadImg().draw(x + 1, y + 24);
 		}
 
-		Color prevColor = imgGraphics.getColor();
-		Color prevBg = imgGraphics.getBackground();
-		Rectangle outerRect = new Rectangle(x + 32 + 1, y + 30,
-				Composition.LEFT_PANEL_WIDTH - 32, 10);
-		Rectangle innerRect = new Rectangle(x + 32 + 2, y + 30,
-				Composition.LEFT_PANEL_WIDTH - 2 - 32, 9);
-		Rectangle progressRect = new Rectangle(x + 32 + 1, y + 30,
-				devMoodProgress, 9);
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.draw(outerRect);
-		imgGraphics.setColor(Color.black);
-		imgGraphics.fill(innerRect);
-		imgGraphics.setColor(Color.gray);
-		imgGraphics.fill(progressRect);
-		imgGraphics.setColor(prevColor);
-		imgGraphics.setBackground(prevBg);
-		// imgGraphics.drawString("" + mood, x, y+10);
+		float x2 = (float)mood * (Composition.LEFT_PANEL_WIDTH - 32) / 100f;
+		context.getProgress118ProgressImg().draw(x + 32 + 1, y + 30, x2 + 32,
+				y + 30 + context.getProgress150ProgressImg().getHeight(), 0, 0,
+				x2, context.getProgress150ProgressImg().getHeight());
+		context.getProgress118FrameImg().draw(x + 32 + 1, y + 30);
 	}
 
 	@Override

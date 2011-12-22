@@ -15,6 +15,7 @@ public class ProductionPlan {
 	public static final String DACHI = "DACHI";
 	public static final String ECE = "ECE";
 	
+	@SuppressWarnings("serial")
 	public static final Map<String, Integer> mapNumProductions = new HashMap<String, Integer>() {{
 		put(HARSUM, 10);
 		put(MUNICH, 5);

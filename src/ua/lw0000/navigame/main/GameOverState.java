@@ -7,14 +7,12 @@ import java.util.List;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
-import org.newdawn.slick.util.Log;
 
 import ua.lw0000.navigame.controller.Controller;
 import ua.lw0000.navigame.intro.IntroState;
@@ -27,8 +25,6 @@ public class GameOverState extends BasicGameState {
 	private static final int TITLE_ROW_HEIGHT = 20; // pixels per msec
 	
 	private int stateId;
-	private Image image;
-	private int score;
 	private boolean shouldLeave = false;
 	private int firstStringIdx, lastStringIdx;
 	private List<String> allStrings;
