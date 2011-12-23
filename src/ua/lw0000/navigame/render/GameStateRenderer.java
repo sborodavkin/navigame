@@ -24,7 +24,11 @@ public class GameStateRenderer implements Renderer {
 
 	private AnchorMouseOverArea btnHWBasic;
 	private AnchorMouseOverArea btnHWAdvanced;
-	private AnchorMouseOverArea btnHWSuper;;
+	private AnchorMouseOverArea btnHWSuper;
+	
+	private AnchorMouseOverArea btnPause;
+	private AnchorMouseOverArea btnRestart;
+	
 
 	public GameStateRenderer(MoneyController moneyCtrl,
 			TimeController timeController, MoodController moodController,
@@ -89,6 +93,38 @@ public class GameStateRenderer implements Renderer {
 		};
 		btnHWSuper.setAnchorW(Composition.LEFT_PANEL_W);
 		btnHWSuper.setAnchorN(Composition.ROOM_NW);
+		
+		btnPause = new AnchorMouseOverArea(NaviGame.gameContainer, context.getPauseImg(), 10, 530, 48, 48) {
+			@Override
+			public void mousePressed(int button, int mx, int my) {
+				super.mousePressed(button, mx, my);
+				if (isMouseOver()) {
+					boolean isPaused = moneyController.getGameState().getController().isPaused();
+					moneyController.getGameState().getController().setPaused(!isPaused);
+				}
+			}
+			
+		};
+		btnPause.setAnchorW(Composition.LEFT_PANEL_W);
+		btnPause.setAnchorN(Composition.ROOM_NW);
+		
+		btnRestart = new AnchorMouseOverArea(NaviGame.gameContainer, context.getRestartImg(), 65, 530, 48, 48) {
+			@Override
+			public void mousePressed(int button, int mx, int my) {
+				super.mousePressed(button, mx, my);
+				if (isMouseOver()) {
+					try {
+						moneyController.getGameState().getController().restartGame();
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		};
+		btnRestart.setMouseOverImage(context.getRestartHoverImg());
+		btnRestart.setAnchorW(Composition.LEFT_PANEL_W);
+		btnRestart.setAnchorN(Composition.ROOM_NW);
 	}
 
 	@Override
@@ -100,6 +136,7 @@ public class GameStateRenderer implements Renderer {
 		renderHardware(imgGraphics, 0, 130);
 		renderCompiler(imgGraphics, 0, 230);
 		renderTeamMood(imgGraphics, 0, 280);
+		renderControls(imgGraphics, 0, 530);
 
 		imgGraphics.flush();
 		return context.getGenImage().copy();
@@ -258,9 +295,23 @@ public class GameStateRenderer implements Renderer {
 				x2, context.getProgress150ProgressImg().getHeight());
 		context.getProgress118FrameImg().draw(x + 32 + 1, y + 30);
 	}
+	
+	private void renderControls(Graphics g, float x, float y) {
+		if (moneyController.getGameState().getController().isPaused()) {
+			btnPause.setNormalImage(context.getPauseLockedImg());
+			btnPause.setMouseOverImage(context.getPauseLockedImg());
+			btnPause.setMouseDownImage(context.getPauseImg());
+		} else {
+			btnPause.setNormalImage(context.getPauseImg());
+			btnPause.setMouseOverImage(context.getPauseHoverImg());
+			btnPause.setMouseDownImage(context.getPauseImg());
+		}
+		btnPause.render(NaviGame.gameContainer, g);
+		btnRestart.render(NaviGame.gameContainer, g);
+	}
 
 	@Override
 	public void updateMouseAreas(float x, float y) {
-		// noop
+		// noop		
 	}
 }

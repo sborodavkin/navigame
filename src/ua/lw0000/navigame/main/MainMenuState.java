@@ -16,7 +16,7 @@ public class MainMenuState extends BasicGameState {
 
 	private Image imgBackground, imgStart, imgInstructions, imgExit;
 
-	private int startN = 220;
+	private int startN = 160;
 	private int startW = 280;
 	private float scaleStep = 0.0002f;
 
@@ -53,15 +53,14 @@ public class MainMenuState extends BasicGameState {
 								* (startScale - 1) / 2), startN, startScale);
 		imgInstructions.draw(
 				startW
-						- 30
+
 						- Math.abs((float) imgInstructions.getWidth()
-								* (instructionsScale - 1) / 2), startN + 120,
+								* (instructionsScale - 1) / 2), startN + 90,
 				instructionsScale);
-		imgExit.draw(
-				startW
-						+ 85
-						- Math.abs((float) imgExit.getWidth() * (exitScale - 1)
-								/ 2), startN + 240, exitScale);
+		imgExit.draw(startW
+
+		- Math.abs((float) imgExit.getWidth() * (exitScale - 1) / 2),
+				startN + 180, exitScale);
 
 	}
 
@@ -80,14 +79,13 @@ public class MainMenuState extends BasicGameState {
 		if ((mouseX >= startW && mouseX <= startW + imgStart.getWidth())
 				&& (mouseY >= startN && mouseY <= startN + imgStart.getHeight())) {
 			insideStart = true;
-		} else if ((mouseX >= startW - 30 && mouseX <= startW - 30
+		} else if ((mouseX >= startW && mouseX <= startW
 				+ imgInstructions.getWidth())
-				&& (mouseY >= startN + 120 && mouseY <= startN + 120
+				&& (mouseY >= startN && mouseY <= startN + 90
 						+ imgInstructions.getHeight())) {
 			insideInstructions = true;
-		} else if ((mouseX >= startW + 80 && mouseX <= startW + 80
-				+ imgExit.getWidth())
-				&& (mouseY >= startN + 240 && mouseY <= startN + 240
+		} else if ((mouseX >= startW && mouseX <= startW + imgExit.getWidth())
+				&& (mouseY >= startN + 180 && mouseY <= startN + 180
 						+ imgExit.getHeight())) {
 			insideExit = true;
 		}
@@ -98,7 +96,8 @@ public class MainMenuState extends BasicGameState {
 			}
 			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 				input.clearMousePressedRecord();
-				game.enterState(NaviGame.GAMEPLAY_STATE, new FadeOutTransition(), new FadeInTransition());
+				game.enterState(NaviGame.GAMEPLAY_STATE,
+						new FadeOutTransition(), new FadeInTransition());
 			}
 		} else {
 			if (startScale > 1.0f) {
@@ -112,7 +111,8 @@ public class MainMenuState extends BasicGameState {
 			}
 			if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 				input.clearMousePressedRecord();
-				game.enterState(NaviGame.INSTRUCTIONS_STATE, new FadeOutTransition(), new FadeInTransition());
+				game.enterState(NaviGame.INSTRUCTIONS_STATE,
+						new FadeOutTransition(), new FadeInTransition());
 			}
 		} else {
 			if (instructionsScale > 1.0f) {

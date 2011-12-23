@@ -71,6 +71,12 @@ public class Context {
 	private static final String PATH_PROGRESS_118_FRAME = "image/progress_118_frame.png";
 	private static final String PATH_PROGRESS_118_PROGRESS = "image/progress_118_progress.png";
 	
+	private static final String PATH_PAUSE = "image/pause.png";
+	private static final String PATH_PAUSE_HOVER = "image/pause_hover.png";
+	private static final String PATH_PAUSE_LOCKED = "image/pause_locked.png";
+	private static final String PATH_RESTART = "image/restart.png";
+	private static final String PATH_RESTART_HOVER = "image/restart_hover.png";
+	
 	/**
 	 * Is used to draw procedurally-generated images
 	 * (e.g. sprite + text etc.)
@@ -125,6 +131,11 @@ public class Context {
 	private Image progress150ProgressImg;
 	private Image progress118FrameImg;
 	private Image progress118ProgressImg;
+	private Image pauseImg;
+	private Image pauseHoverImg;
+	private Image pauseLockedImg;
+	private Image restartImg;
+	private Image restartHoverImg;
 	
 	private Image[] mapImg;
 		
@@ -188,6 +199,12 @@ public class Context {
 		progress150ProgressImg = new Image(PATH_PROGRESS_150_PROGRESS);
 		progress118FrameImg = new Image(PATH_PROGRESS_118_FRAME);
 		progress118ProgressImg = new Image(PATH_PROGRESS_118_PROGRESS);
+		
+		pauseImg = new Image(PATH_PAUSE);
+		pauseHoverImg = new Image(PATH_PAUSE_HOVER);
+		pauseLockedImg = new Image(PATH_PAUSE_LOCKED);
+		restartImg = new Image(PATH_RESTART);
+		restartHoverImg = new Image(PATH_RESTART_HOVER);
 	}
 	
 	private void initFonts() throws SlickException {
@@ -405,7 +422,27 @@ public class Context {
 	public Image getProgress118ProgressImg() {
 		return progress118ProgressImg;
 	}
+
+	public Image getPauseImg() {
+		return pauseImg;
+	}
+
+	public Image getPauseHoverImg() {
+		return pauseHoverImg;
+	}
 	
+	public Image getPauseLockedImg() {
+		return pauseLockedImg;
+	}
+
+	public Image getRestartImg() {
+		return restartImg;
+	}
+
+	public Image getRestartHoverImg() {
+		return restartHoverImg;
+	}
 	
 }
+
 

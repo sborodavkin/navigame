@@ -19,6 +19,7 @@ public class NaviGame extends StateBasedGame {
 	
 	public static GameContainer gameContainer;
 	private GameplayState gameplayState;
+	public static NaviGame game;
 	
 	public NaviGame() {
 		super("THE NAVIGAME");
@@ -54,8 +55,8 @@ public class NaviGame extends StateBasedGame {
 	}
 	
 	public static void main(String[] args) throws SlickException {
-		NaviGame ag = new NaviGame();
-		AppGameContainer app = new AppGameContainer(ag);
+		game = new NaviGame();
+		AppGameContainer app = new AppGameContainer(game);
 		app.setShowFPS(false);
 		app.setVSync(true);
 		gameContainer = app;

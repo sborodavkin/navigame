@@ -3,13 +3,19 @@ package ua.lw0000.navigame.controller;
 import java.util.Iterator;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import ua.lw0000.navigame.controller.ShoutController.ShoutPosition;
 import ua.lw0000.navigame.main.Composition;
 import ua.lw0000.navigame.main.Context;
+import ua.lw0000.navigame.main.GameOverState;
+import ua.lw0000.navigame.main.NaviGame;
 import ua.lw0000.navigame.model.Developer;
 import ua.lw0000.navigame.model.GameState;
 import ua.lw0000.navigame.model.Map;
@@ -55,6 +61,8 @@ public class Controller {
 	private MapRenderer mapRenderer;
 	private ShoutRenderer shoutRenderer;
 	private NPCRenderer npcRenderer;
+
+	private boolean paused;
 
 	/**
 	 * The constructor
@@ -114,7 +122,7 @@ public class Controller {
 	 * Render global background
 	 */
 	public void renderBackground(Graphics g) {
-		context.getBackground().draw(0,0);
+		context.getBackground().draw(0, 0);
 	}
 
 	/**
@@ -204,7 +212,7 @@ public class Controller {
 	 * @return result of TimeController.processTimeEvent
 	 */
 	public boolean processTimeEvent(int delta) {
-		return timeController.processTimeEvent(delta);
+		return isPaused() ? true : timeController.processTimeEvent(delta);
 	}
 
 	/**
@@ -389,9 +397,19 @@ public class Controller {
 	public GameState getGameState() {
 		return gameState;
 	}
-	
-	
-	
-	
 
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public void setPaused(boolean paused) {
+		this.paused = paused;
+	}
+
+	public void restartGame() throws SlickException {
+		StateBasedGame sbg = NaviGame.game;
+		((GameOverState) sbg.getState(NaviGame.GAMEOVER_STATE)).reset();
+		sbg.enterState(NaviGame.GAMEOVER_STATE, new FadeOutTransition(
+				Color.black, 5000), new FadeInTransition(Color.black, 3000));
+	}
 }
