@@ -115,7 +115,6 @@ public class NPCController {
 							loc.setSpeakTime(0);
 						} else {
 							it.remove();
-							Log.info("Removed2");
 						}
 					} else {
 						if (loc.getSpeakTime() + deltaMs >= NPC_SPEAK_TIME) {

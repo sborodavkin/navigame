@@ -7,15 +7,21 @@ public class Production extends Resource {
 	private static int nameId = -1;
 	
 	public static final String[] ALL_NAMES = {
+		"VBrezitskiy",		
 		"MPolyakov",
 		"IShevchenko",
-		"YAndreev",
+		"YAndreev",		
 		"ARudenko",
+		"PMolchinikolov",
 		"SDerevyanko",
-		"TKhodeeva",
+		"BKalenik",
 		"MMospan",
+		"TKhodeeva",		
 		"VVrublevskiy",
 		"SZavodnov",
+		"ATurchin",
+		"SRatsiborinskiy",
+		"YKornienko"
 	};
 	
 	public Production() {

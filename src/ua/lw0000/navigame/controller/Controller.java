@@ -418,6 +418,6 @@ public class Controller {
 		StateBasedGame sbg = NaviGame.game;
 		((GameOverState) sbg.getState(NaviGame.GAMEOVER_STATE)).reset();
 		sbg.enterState(NaviGame.GAMEOVER_STATE, new FadeOutTransition(
-				Color.black, 5000), new FadeInTransition(Color.black, 3000));
+				Color.black, 2000), new FadeInTransition(Color.black, 3000));
 	}
 }

@@ -58,6 +58,10 @@ public class GameOverState extends BasicGameState {
 		allStrings.add("\n");
 		allStrings.addAll(Arrays.asList(Production.ALL_NAMES));
 		allStrings.add("\n");
+		allStrings.add("Special Guest Star:");		
+		allStrings.add("\n");
+		allStrings.add("Dr. Peter Kunath");
+		allStrings.add("\n");
 		allStrings.add("\n");
 		allStrings.add("(C) Sergey Borodavkin, 2011");
 		allStrings.add("\n");

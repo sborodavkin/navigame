@@ -17,25 +17,16 @@ public class Developer extends Resource {
 	
 	public static final String[][] ALL_NAMES = {{
 		"EBorshch",
-		"IPoletaev",
-		"MZaikin",
+		"IPoletaev",		
 		"AKlimenko",
 		"DRudetskiy",
-		"MMakukha",
-		"SZaika",
-		"MMedvedev",
+		"MMakukha",		
 		"IBarykina",
-		"ATurbin",
-		"IGuk",
-		"VVasyanovich",
 		"MPopov",
 		"ANagornaya",
-		"AKhaysin",
-		"IGulyaev",
 		"NSukhanov",
 		"DKovalov",
-		"SPrutskov",
-		"DStreltsov",
+		"IGulyaev",
 		"VUnguryan",
 		"YLupol",
 		"AKulbatskiy",
@@ -52,7 +43,15 @@ public class Developer extends Resource {
 		"ATurbin",
 		"AYakovenko",
 		"EPivovarov", 
-		"YPitomets"
+		"YPitomets",
+		"MMedvedev",
+		"SZaika",
+		"VVasyanovich",
+		"AKhaysin",
+		"IGuk",
+		"SPrutskov",
+		"DStreltsov",
+		"MZaikin",
 	}, {
 		"ADobrovolskiy",
 		"VOsykov",
@@ -61,15 +60,16 @@ public class Developer extends Resource {
 		"DSamokhvalov",
 		"AKvartalnyy",
 		"ARodichkin",
-		"AReshitko",
 		"SKulikov",
-		"ABagno"		
+		"ABagno",
+		"PPopov",
+		"AReshitko"
 	}, {		
 		"IGulyanitskiy",
 		"DProkopiuk",
+		"AKultepin",
 		"ARomanyuk",		
 		"AKondratiuk",
-		"AKultepin",
 		"SMikhaylenko"
 	}};
 	
