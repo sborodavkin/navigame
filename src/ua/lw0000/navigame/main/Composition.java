@@ -31,11 +31,11 @@ public class Composition {
 	public static final int ROOM_CELL_SIZE = 104;  // room cell
 	public static final int ROOM_SPRITE_SIZE = 52; // actual resource sprite
 	
-	public static final int MAP_WIDTH = 58;
-	public static final int MAP_HEIGHT = 14;	
-	public static final int AVAIL_MAP_N = 580;
-	public static final int AVAIL_MAP_W = 50;	
-	public static final int AVAIL_MAP_STEP = 5;
+	public static final int MAP_WIDTH = 86;
+	public static final int MAP_HEIGHT = 56;	
+	public static final int AVAIL_MAP_N = 544;
+	public static final int AVAIL_MAP_W = 20;	
+	public static final int AVAIL_MAP_STEP = 12;
 	
 	public static final int MONEY_N = 20;
 	public static final int MONEY_W = 300;

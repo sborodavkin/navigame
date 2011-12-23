@@ -60,8 +60,8 @@ public class ShoutRenderer implements Renderer {
 				Color cloud = new Color(Color.white);
 				cloud.a = c.a;
 				// the current cloud + font => cloud is ok for 12 chars
-				float xScale = shout.getText().length() <= 12 ? 1
-						: (float) shout.getText().length() / 14;
+				float xScale = shout.getText().length() <= 8 ? 1
+						: (float) shout.getText().length() / 10;
 				GL11.glPushMatrix();
 				GL11.glScalef(xScale, 1, 1);
 				imgGraphics.drawImage(context.getShoutCloudImg(),

@@ -44,7 +44,7 @@ public class MapRenderer implements Renderer {
 
 				imgGraphics.drawString("" + numProducing, Composition
 						.getMapW(i)
-						- Composition.AVAIL_MAP_W + 30, 0);
+						- Composition.AVAIL_MAP_W + 60, 0);
 				imgGraphics.flush();
 			}
 		}

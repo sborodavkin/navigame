@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -83,14 +84,15 @@ public class NPCRenderer implements Renderer {
 	}
 
 	private void renderCallout(Graphics g, NPC npc, NPCLocation loc) {
-		float xScale = npc.getText().length() <= 14 ? 1 : (float) npc.getText()
-				.length() / 14;
+		float xScale = npc.getText().length() <= 8 ? 1 : (float) npc.getText()
+				.length() / 12;
 		GL11.glPushMatrix();
 		GL11.glScalef(xScale, 1, 1);
 		g.drawImage(context.getCalloutImg(), loc.getLocation().getX() / xScale
 				- context.getCalloutImg().getWidth(),
 				loc.getLocation().getY() - 30);
 		GL11.glPopMatrix();
+		g.setColor(Color.black);
 		g.setFont(context.getSmallBlackFont());
 		g.drawString(npc.getText(), Math.round(loc.getLocation().getX()
 				- context.getCalloutImg().getWidth()*xScale + 5), loc.getLocation()

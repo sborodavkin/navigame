@@ -11,6 +11,7 @@ import java.util.Set;
 import ua.lw0000.navigame.model.Developer;
 import ua.lw0000.navigame.model.Office;
 import ua.lw0000.navigame.model.Position;
+import ua.lw0000.navigame.model.Production;
 import ua.lw0000.navigame.model.Shout;
 
 public class ShoutController {
@@ -24,6 +25,9 @@ public class ShoutController {
 	private float HOR_SHOUT_CURSE_DEVIATION = 0.8f;
 
 	private Random rand;
+	
+	/** trigger: false = generate for developers, true = for production */
+	private boolean triggerDevProd = false;
 
 	public ShoutController(Office office) {
 		this.shouts = new HashMap<Shout, ShoutController.ShoutPosition>();
@@ -33,23 +37,41 @@ public class ShoutController {
 	}
 
 	public void addRandomShouts() {
-		List<Developer> list = new ArrayList<Developer>();
+		// developers
+		List<Position> list = new ArrayList<Position>();
 		for (int i = 0; i < office.getNumRows(); i++) {
 			for (int j = 0; j < office.getNumColumns(); j++) {
 				Position pos = office.getPosition(i, j);
-				if (pos instanceof Developer) {
-					list.add((Developer)pos);					
+				if (triggerDevProd == false) {
+					if (pos instanceof Developer) {
+						list.add((Developer)pos);					
+					}
+				} else {
+					if (pos instanceof Production) {
+						list.add((Production)pos);					
+					}
 				}
 			}
 		}
 		if (list.size() > 0) {		
+			int index = rand.nextInt(list.size());
 			ShoutPosition shoutPos = office
-					.getAnchorForPosition(list.get(rand.nextInt(list.size())));
-			addShout(new Shout(
-					ShoutGenerator.generateDeveloperCurse(),
-					Shout.CURSE, shoutPos.getX(), shoutPos.getY(),
-					100, 0.05f));
+					.getAnchorForPosition(list.get(index));
+			if (triggerDevProd == false) {
+				addShout(new Shout(
+						ShoutGenerator.generateDeveloperCurse((Developer)list.get(index)),
+						Shout.CURSE, shoutPos.getX(), shoutPos.getY(),
+						100, 0.05f));
+			} else {
+				addShout(new Shout(
+						ShoutGenerator.generateProductionCurse((Production)list.get(index)),
+						Shout.CURSE, shoutPos.getX(), shoutPos.getY(),
+						100, 0.05f));
+			}
 		}
+		
+		// invert trigger to make another class of people curse next time
+		triggerDevProd = !triggerDevProd;
 	}
 
 	public void updateShouts(int deltaMs) {

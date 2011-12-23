@@ -212,7 +212,15 @@ public class Controller {
 	 * @return result of TimeController.processTimeEvent
 	 */
 	public boolean processTimeEvent(int delta) {
-		return isPaused() ? true : timeController.processTimeEvent(delta);
+		if (!isPaused()) {
+			if (mapController.getProductionPlan().isPlanFulfilled() == true
+					&& getGameState().getCompilerComplete() == 100) {
+				return false;
+			}
+			return timeController.processTimeEvent(delta);
+		} else {
+			return true;
+		}
 	}
 
 	/**

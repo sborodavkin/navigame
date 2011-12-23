@@ -2,6 +2,9 @@ package ua.lw0000.navigame.controller;
 
 import java.util.Random;
 
+import ua.lw0000.navigame.model.Developer;
+import ua.lw0000.navigame.model.Production;
+
 public class ShoutGenerator {
 
 	private static String[] EXCEPTIONS = { "AnacondaException",
@@ -198,7 +201,7 @@ public class ShoutGenerator {
 			"3.0", "3.1", "3.2", "3.3", "3.4" };
 
 	private static String[] CURSES_PREFIX = {
-		"Fucking", "Bloody", "Holy", "Stupid"
+		"Fucking", "Bloody", "Holy", "Stupid", "Damn", "Crappy"
 	};
 	
 	private static String[] CURSES = {
@@ -207,14 +210,28 @@ public class ShoutGenerator {
 		"Shithead", "Wanker", "Moron"
 	};
 	
-	private static String[] CURSES_ON = {
+	private static String[] CURSES_ON_JAVA = {
 		"Eclipse", "IDEA", "code", "OSGi", "Hibernate", "Java", "NDS", "Datascript",
-		"Attribute", "MOUSE", "KEYBOARD", "MONITOR", "MANAGEMENT", "Lane", "Link",
+		"Attribute", "Perforce", "JIRA", "ticket", "MANAGEMENT", "Lane", "Link",
 		"Intersection", "Tile", "Junction", "AMD", "BMD", "Routing", "Naming",
-		"BLOB", "WORLD MAP", "Transition", "Polygon", "Feature", "Geometry"
+		"BLOB", "WORLD MAP", "Transition", "Polygon", "Feature", "Geometry", "SDDD"
+	};
+
+	private static String[] CURSES_ON_CPP = {
+		"Studio", "STL", "template", "code review", "design", "C++", "NDS", "Datascript",
+		"Attribute", "DLL", "Linker", "LUXproject", "Perforce", "Lane", "Link",
+		"Intersection", "Tile", "Junction", "AMD", "BMD", "Routing", "Naming",
+		"BLOB", "WORLD MAP", "Transition", "Polygon", "Feature", "Geometry", "SDDD"
 	};
 	
-	public static String generateDeveloperCurse() {
+	private static String[] CURSES_ON_PRODUCTION = {
+		"Raw data", "Compiler", "Anaconda", "BMD", "Routing", "Naming", "POI", "AMD",
+		"Map viewer", "Report", "ticket", "JIRA", "server", "worker", "Postgres", "SQLite",
+		"config", "XML", "Putty", "WinSCP"
+	};
+	
+	
+	public static String generateDeveloperCurse(Developer dev) {
 		String res = "";
 		Random rand = new Random(System.currentTimeMillis());
 		if (rand.nextFloat() > 0.5) {
@@ -226,7 +243,28 @@ public class ShoutGenerator {
 			res += CURSES[rand.nextInt(CURSES.length)];
 		}
 		if (rand.nextFloat() > 0.5) {
-			res += " " + CURSES_ON[rand.nextInt(CURSES_ON.length)];
+			if (dev.getFeature() == Developer.FEATURE_NDSLIB) {
+				res += " " + CURSES_ON_CPP[rand.nextInt(CURSES_ON_CPP.length)];
+			} else {
+				res += " " + CURSES_ON_JAVA[rand.nextInt(CURSES_ON_JAVA.length)];
+			}
+		}
+		return res.toUpperCase() + "!";
+	}
+	
+	public static String generateProductionCurse(Production prod) {
+		String res = "";
+		Random rand = new Random(System.currentTimeMillis());
+		if (rand.nextFloat() > 0.5) {
+			res = "What a ";
+		}
+		if (rand.nextFloat() > 0.5) {
+			res += CURSES_PREFIX[rand.nextInt(CURSES_PREFIX.length)] + " " + CURSES[rand.nextInt(CURSES.length)];
+		} else {
+			res += CURSES[rand.nextInt(CURSES.length)];
+		}
+		if (rand.nextFloat() > 0.5) {			
+			res += " " + CURSES_ON_PRODUCTION[rand.nextInt(CURSES_ON_PRODUCTION.length)];			
 		}
 		return res.toUpperCase() + "!";
 	}
